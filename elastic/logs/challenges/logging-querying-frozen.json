@@ -17,7 +17,7 @@
         },
         "retry-until-success": true
       }
-    }
+    },
     {% if bulk_start_date and bulk_end_date %}
       {
         "name": "bulk-index",
