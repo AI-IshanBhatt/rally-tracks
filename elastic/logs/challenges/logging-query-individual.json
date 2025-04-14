@@ -1,0 +1,25 @@
+{
+  "name": "logging-frozen-tier-queries",
+  "description": "Runs queries when indices are loaded in the frozen tier",
+
+  "schedule": [
+    {
+      "name": "check-cluster-health",
+      "operation": {
+        "operation-type": "cluster-health",
+        "index": "_all",
+        "request-params": {
+          "wait_for_status": "{{cluster_health | default('green')}}",
+          "wait_for_no_relocating_shards": "true"
+        },
+        "retry-until-success": true
+      }
+    },
+    {
+      "name": "frozen-queries-runner",
+      "operation": {
+        "operation-type": "frozen-queries-runner"
+      }
+    }
+  ]
+}

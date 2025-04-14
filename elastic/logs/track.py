@@ -48,6 +48,7 @@ from shared.schedulers.indexing import TimestampThrottler
 from shared.schedulers.query import WorkflowScheduler
 from shared.track_processors import data_generator
 from shared.track_processors.track_id_generator import TrackIdGenerator
+from shared.runners.frozen_queries import FrozenQueriesRunner
 
 
 async def setup_local_remote(es, params):
@@ -107,3 +108,5 @@ def register(registry):
 
     registry.register_runner("start-reindex-data-stream", StartReindexDataStream(), async_runner=True)
     registry.register_runner("wait-for-reindex-data-stream", WaitForReindexDataStream(), async_runner=True)
+
+    registry.register_runner("frozen-queries-runner", FrozenQueriesRunner(), async_runner=True)
