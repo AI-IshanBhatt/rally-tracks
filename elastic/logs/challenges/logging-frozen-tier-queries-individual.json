@@ -1,7 +1,9 @@
 {
-  "name": "logging-frozen-tier-queries",
+  "name": "logging-frozen-tier-queries-individual",
   "description": "Runs queries when indices are loaded in the frozen tier",
-
+  "parameters": {
+    "generate-data": false
+  },
   "schedule": [
     {
       "name": "check-cluster-health",
