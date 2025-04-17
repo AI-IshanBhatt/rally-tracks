@@ -17,9 +17,11 @@ def extract_index_string(index_name):
         return ""
 
 
-def get_all_indices(es):
-    all_indices = es.indices.get_alias(index="*")
+async def get_all_indices(es):
+    all_indices = await es.indices.get_alias(index="*")
+    print(f"ALL INDICES {all_indices}")
     answer = set([extract_index_string(i) for i in dict(all_indices).keys()])
+    print(f"Answer {answer}")
     return answer
 
 
@@ -84,15 +86,10 @@ class FrozenQueriesRunner:
     # Also, put the iteration in the challenge do not put it here, or we can grab it from params
     # Request time out get it from the params later
     async def __call__(self, es, params):
-        all_indices = [i for i in get_all_indices(es) if i]
-
-        query_results = {}
-
-        for index_name in all_indices:
-            query = generate_query(index_name=index_name)
-
-            result = await es.search(index=index_name + "*", body=query, request_timeout=120)
-
-            query_results[index_name] = len(result["hits"]["hits"])
-
-        return query_results
+        clear_cache = params.get("clear_cache", False)
+        if clear_cache:
+            await es.searchable_snapshots.clear_cache()
+        index_name = params.get("index_name", "*")
+        query = generate_query(index_name=index_name)
+        result = await es.search(index=index_name + "*", body=query, request_timeout=120)
+        return len(result["hits"]["hits"])

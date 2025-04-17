@@ -4,6 +4,11 @@
 "apache", "system/auth", "system/syslog/dashboard", "system/syslog/lens", "mysql/dashboard", "redis", "mysql/lens",
 "postgresql/overview", "postgresql/duration"])) %}
 
+{% set p_partial_indices = (partial_indices | default(["logs-apache.access-default", "logs-redis.log-default", "logs-mysql.error-default",
+"logs-nginx.error-default", "logs-system.auth-default", "logs-mysql.slowlog-default", "logs-postgresql.log-default",
+"logs-apache.error-default", "logs-nginx.access-default", "logs-system.syslog-default",
+"logs-k8-application.log-default", "logs-kafka.log-default", "logs-redis.slowlog-default"])) %}
+
 {% set p_num_query_workflows = p_query_workflows | length %}
 {% set num_corpus = 18 %}
 {% set p_bulk_indexing_clients = (bulk_indexing_clients | default(8)) %}

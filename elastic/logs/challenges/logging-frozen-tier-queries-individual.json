@@ -1,3 +1,4 @@
+{% import "rally.helpers" as rally %}
 {
   "name": "logging-frozen-tier-queries-individual",
   "description": "Runs queries when indices are loaded in the frozen tier",
@@ -17,11 +18,16 @@
         "retry-until-success": true
       }
     },
+    {% for index_name in p_partial_indices %}
     {
-      "name": "frozen-queries-runner",
+      "name": {{index_name | tojson }},
       "operation": {
-        "operation-type": "frozen-queries-runner"
-      }
-    }
+        "operation-type": "frozen-queries-runner",
+        "clear_cache": true,
+        "index_name": {{index_name | tojson}}
+      },
+      "iterations": 50
+    }{{ ", " if not loop.last else "" }}
+    {% endfor %}
   ]
 }
