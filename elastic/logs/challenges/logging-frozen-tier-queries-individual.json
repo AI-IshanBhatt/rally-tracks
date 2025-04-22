@@ -23,7 +23,7 @@
       "name": {{index_name | tojson }},
       "operation": {
         "operation-type": "frozen-queries-runner",
-        "clear_cache": true,
+        "clear_cache": "{{ p_clear_cache_flag }}",
         "index_name": {{index_name | tojson}}
       },
       "iterations": 50

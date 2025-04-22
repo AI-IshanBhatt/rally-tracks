@@ -76,6 +76,8 @@
 
 {% set p_worker_threads_enabled = (worker_threads_enabled | default(true))  %}
 
+{% set p_clear_cache_flag = (clear_cache_flag | default(true))  %}
+
 {% set es_version = "7.13.2" %}
 
 {% set p_integration_ratios = (integration_ratios | default({
