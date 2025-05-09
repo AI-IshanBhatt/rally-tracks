@@ -24,6 +24,7 @@
       "operation": {
         "operation-type": "frozen-queries-runner",
         "clear_cache": "{{ p_clear_cache_flag }}",
+        "query_year": "{{ p_query_year }}",
         "index_name": {{index_name | tojson}}
       },
       "iterations": 50

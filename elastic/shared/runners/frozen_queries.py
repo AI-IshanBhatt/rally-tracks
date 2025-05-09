@@ -26,20 +26,21 @@ async def get_all_indices(es):
 
 
 def get_random():
-    yyyy = 2020
     mm = "0" + str(random.randint(1, 3))
     dd = random.randint(1, 31)
 
     dd = str(dd) if dd >= 10 else "0" + str(dd)
 
-    return dd, mm, yyyy
+    return dd, mm
 
 
-def generate_query(index_name):
-    dd, mm, yyyy = get_random()
+def generate_query(index_name, query_year):
+    dd, mm = get_random()
 
     if (dd == "31" or dd == "30") and mm == "02":
         dd = 25
+
+    yyyy = query_year
 
     query_string = "CentOS Linux" if index_name in CENT_OS_QUERY_INDICES else "error"
 
@@ -87,9 +88,10 @@ class FrozenQueriesRunner:
     # Request time out get it from the params later
     async def __call__(self, es, params):
         clear_cache = params.get("clear_cache", False)
+        query_year = params.get("query_year", "2020")
         if clear_cache:
             await es.searchable_snapshots.clear_cache()
         index_name = params.get("index_name", "*")
-        query = generate_query(index_name=index_name)
+        query = generate_query(index_name=index_name, query_year=query_year)
         result = await es.search(index=index_name + "*", body=query, request_timeout=120)
         return len(result["hits"]["hits"])
