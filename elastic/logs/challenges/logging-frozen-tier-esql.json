@@ -1,0 +1,67 @@
+{% import "rally.helpers" as rally %}
+{
+  "name": "logging-frozen-tier-queries-individual",
+  "description": "Runs queries when indices are already loaded",
+  "parameters": {
+    "generate-data": false
+  },
+  "schedule": [
+    {
+      "name": "check-cluster-health",
+      "operation": {
+        "operation-type": "cluster-health",
+        "index": "_all",
+        "request-params": {
+          "wait_for_status": "{{cluster_health | default('green')}}",
+          "wait_for_no_relocating_shards": "true"
+        },
+        "retry-until-success": true
+      }
+    },
+    {
+      "operation": "apache_match_esql_query",
+      "clients": 1,
+      "warmup-iterations": 20,
+      "iterations": 100,
+      "tags": ["esql", "search"],
+      "bulk_start_date": "2024-01-01",
+      "bulk_end_date": "2024-04-01"
+    },
+    {
+      "operation": "kafka_match_esql_query",
+      "clients": 1,
+      "warmup-iterations": 20,
+      "iterations": 100,
+      "tags": ["esql", "search"],
+      "bulk_start_date": "2024-01-01",
+      "bulk_end_date": "2024-04-01"
+    },
+    {
+      "operation": "qstr_esql_query",
+      "clients": 1,
+      "warmup-iterations": 20,
+      "iterations": 100,
+      "tags": ["esql", "search"],
+      "bulk_start_date": "2024-01-01",
+      "bulk_end_date": "2024-04-01"
+    },
+    {
+      "operation": "kql_esql_query",
+      "clients": 1,
+      "warmup-iterations": 20,
+      "iterations": 100,
+      "tags": ["esql", "search"],
+      "bulk_start_date": "2024-01-01",
+      "bulk_end_date": "2024-04-01"
+    },
+    {
+      "operation": "syslog_qstr_esql_query",
+      "clients": 1,
+      "warmup-iterations": 20,
+      "iterations": 100,
+      "tags": ["esql", "search"],
+      "bulk_start_date": "2024-01-01",
+      "bulk_end_date": "2024-04-01"
+    }
+  ]
+}
