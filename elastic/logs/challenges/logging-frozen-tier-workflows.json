@@ -1,6 +1,6 @@
 {% import "rally.helpers" as rally %}
 {
-  "name": "logging-querying-frozen",
+  "name": "logging-frozen-tier-workflows",
   "description": "Applies a query workload. Ensures data streams exist so queries can be run, but does not remove existing data.",
   "parameters": {
     "generate-data": false
