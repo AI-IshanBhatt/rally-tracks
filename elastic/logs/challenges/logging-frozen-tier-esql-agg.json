@@ -59,8 +59,8 @@
       "warmup-iterations": 10,
       "iterations": 50,
       "tags": ["esql", "limit0"],
-      "bulk_start_date": "{{ p_frozen_esql_query_min_date }}",
-      "bulk_end_date": "{{ p_frozen_esql_query_max_date }}"
+      "bulk_start_date": "2020-01-01",
+      "bulk_end_date": "2020-04-01"
     },
     {
       "operation": "esql_time_range_and_date_histogram_two_groups_post_filter_limit_0",
@@ -68,8 +68,8 @@
       "warmup-iterations": 10,
       "iterations": 50,
       "tags": ["esql", "limit0"],
-      "bulk_start_date": "{{ p_frozen_esql_query_min_date }}",
-      "bulk_end_date": "{{ p_frozen_esql_query_max_date }}"
+      "bulk_start_date": "2020-01-01",
+      "bulk_end_date": "2020-04-01"
     },
     {
       "operation": "esql_dissect_duration_and_stats_limit_0",
@@ -119,8 +119,8 @@
       "warmup-iterations": 5,
       "iterations": 20,
       "tags": ["esql", "date_histogram"],
-      "bulk_start_date": "{{ p_frozen_esql_query_min_date }}",
-      "bulk_end_date": "{{ p_frozen_esql_query_max_date }}"
+      "bulk_start_date": "2020-01-01",
+      "bulk_end_date": "2020-04-01"
     },
     {
       "operation": "esql_time_range_and_date_histogram_two_groups_post_filter",
@@ -128,8 +128,8 @@
       "warmup-iterations": 5,
       "iterations": 20,
       "tags": ["esql", "date_histogram"],
-      "bulk_start_date": "{{ p_frozen_esql_query_min_date }}",
-      "bulk_end_date": "{{ p_frozen_esql_query_max_date }}"
+      "bulk_start_date": "2020-01-01",
+      "bulk_end_date": "2020-04-01"
     },
     {
       "operation": "esql_dissect_duration_and_stats",
